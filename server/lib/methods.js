@@ -1,8 +1,8 @@
 Meteor.methods({
 
 "search" : function(q){
-users = Meteor.users.find({$or: [{username: q},{"profile.name": q}]}).fetch();
-orgs = Orgs.find({name: q}).fetch();
+users = Meteor.users.find({$text: {$search: q}}).fetch();
+orgs = Orgs.find({$text: {$search: q}}).fetch();
 return {users: users, orgs: orgs};
 },
 
