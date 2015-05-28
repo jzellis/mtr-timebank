@@ -46,6 +46,21 @@ $('#giveUser').modal();
 
 });
 
+$(document.body).on('click', '.giveOrg', function(e){
+
+	if($(e.currentTarget).attr('disabled') != 'disabled'){
+
+id = $(e.currentTarget).attr('data-id');
+
+org = Orgs.findOne({_id: id});
+$("#modals").html('');
+Blaze.renderWithData(Template.giveOrg, org, $('#modals')[0]);
+$('#giveOrg').modal();
+
+}
+
+});
+
 });
 
 
