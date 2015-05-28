@@ -8,7 +8,7 @@ id = Accounts.createUser({
 	profile: {
 		avatar: "/avatar.png",
 		name: "Joshua Ellis",
-		balance: 0,
+		balance: 1000,
 		favoriteUsers: [],
 		favoriteOrgs: []
 	}
@@ -16,7 +16,21 @@ id = Accounts.createUser({
 
 Roles.insert({orgId: "system", userId: id, admin: true});
 
-Accounts.sendEnrollmentEmail(id);
+idb = Accounts.createUser({
+	username: "xopug",
+	email: "davidryal@gmail.com",
+	profile: {
+		avatar: "/avatar.png",
+		name: "David Anderson",
+		balance: 1000,
+		favoriteUsers: [],
+		favoriteOrgs: []
+	}
+});
+
+Roles.insert({orgId: "system", userId: idb, admin: true});
+
+Accounts.sendEnrollmentEmail(idb);
 
 Accounts.createUser({
 	username: "testuser",

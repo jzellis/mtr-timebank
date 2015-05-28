@@ -3,7 +3,49 @@
 <div class='col-md-3'>
 	{{#with currentUser}}
 	{{> userProfile}}
-	{{/with}}
+	<div class="panel-group" id="myFavs" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="userFavsHeading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#myFavs" href="#userFavs" aria-expanded="true" aria-controls="userFavs">
+          <i class='fa fa-heart'></i> My Favorite Users
+        </a>
+      </h4>
+    </div>
+    <div id="userFavs" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="userFavsHeading">
+      <div class="panel-body">
+      	
+      	{{#each profile.favoriteUsers}}
+      	{{#with getUser this}}
+      	{{> userProfileTiny}}
+      	{{/with}}
+      	{{/each}}
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="orgFavsHeading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#myFavs" href="#orgFavs" aria-expanded="true" aria-controls="orgFavs">
+          <i class='fa fa-heart'></i> My Favorite Orgs
+        </a>
+      </h4>
+    </div>
+    <div id="orgFavs" class="panel-collapse collapse" role="tabpanel" aria-labelledby="orgFavsHeading">
+      <div class="panel-body">
+
+      	{{#each profile.favoriteOrgs}}
+      	{{#with getOrg this}}
+{{> orgProfileTiny}}
+      	{{/with}}
+      	{{/each}}
+      
+      </div>
+    </div>
+  </div>
+</div>
+  	{{/with}}
+
 </div>
 <div class='col-md-6'>
 	{{> searchForm}}
