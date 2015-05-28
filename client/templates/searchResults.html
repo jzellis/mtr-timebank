@@ -1,0 +1,28 @@
+<template name='searchResults'>
+	<h4>Users ({{count users}})</h4>
+	{{#if users}}
+	<ul class='users list-unstyled'>
+		{{#each users}}
+		<!-- {{#unless isMe _id}} -->
+		{{> userProfileCompact}}
+		<!-- {{/unless}} -->
+		{{/each}}
+	</ul>
+	{{else}}
+	<p><em>No users found.</em></p>
+	{{/if}}
+<hr>
+	<h4>Orgs ({{count orgs}})</h4>
+
+	{{#if orgs}}
+	<ul class='orgs list-unstyled'>
+		{{#each orgs}}
+		<!-- {{#unless isMe _id}} -->
+		{{> orgProfileCompact}}
+		<!-- {{/unless}} -->
+		{{/each}}
+	</ul>
+	{{else}}
+	<p><em>No orgs found.</em></p>
+	{{/if}}
+</template>

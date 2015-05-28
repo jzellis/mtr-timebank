@@ -1,0 +1,41 @@
+<template name='giveUser'>
+<div class="modal fade" id='giveUser'>
+		<form>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"><i class='fa fa-clock-o'></i> Give time to <strong>{{username}}</strong></h4>
+      </div>
+      <div class="modal-body">
+      	<div class='userProfile' data-id='{{_id}}'>
+		<div class='row'><div class='col-md-4'>
+			<a href='/users/{{username}}'><img class='img-responsive avatar' src='{{profile.avatar}}'></a>
+		</div>
+		<div class='col-md-8'>
+			<div class='displayName'><span class='username'><a href='/users/{{username}}'>{{username}}</a></span> <span class='small text-muted'>{{profile.name}}</span></div>
+		<div class='meta'><span class='balance'>Balance: <i class='fa fa-clock-o'></i> {{profile.balance}}</span></div>
+		<hr>
+
+			<fieldset class='form-group'>
+				<label for='amount'>Give {{username}}</label>
+				 <div class="input-group">
+      <div class="input-group-addon"><i class='fa fa-clock-o'></i></div>
+      <input type='hidden' id='userId' value='{{_id}}'>
+      <input type="text" class="form-control" id="amount" autocomplete="off" placeholder="Amount in half hour increments">
+    </div>
+			</fieldset>
+
+	</div>
+	</div>
+</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Give Time</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+		</form>
+</div><!-- /.modal -->
+</template>

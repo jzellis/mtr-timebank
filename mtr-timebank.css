@@ -1,0 +1,10 @@
+/* CSS declarations go here */
+.userProfile .username, .userProfileCompact .username, .orgProfile .name, .orgProfileCompact .name{
+	font-size: 1.25em;
+	font-weight: bold;
+}
+
+.userProfile .avatar, .userProfileCompact .avatar, .orgProfile .avatar, .orgProfileCompact .avatar{
+	border: 1px solid #ccc;
+	margin-bottom: 5px;
+}

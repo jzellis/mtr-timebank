@@ -1,0 +1,13 @@
+<template name='home'>
+{{#if currentUser}}
+<div class='col-md-3'>
+	{{#with currentUser}}
+	{{> userProfile}}
+	{{/with}}
+</div>
+<div class='col-md-6'>
+	{{> searchForm}}
+	</div>
+{{else}}
+{{/if}}
+</template>

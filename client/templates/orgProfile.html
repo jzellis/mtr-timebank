@@ -1,0 +1,23 @@
+<template name='orgProfile'>
+	<div class='orgProfile panel panel-default' data-id='{{_id}}'>
+		<div class='panel-body'>
+		<div class='row'><div class='col-md-4'>
+			<a href='/orgs/{{slug}}'><img class='img-responsive avatar' src='{{avatar}}'></a>
+		</div>
+		<div class='col-md-8'>
+			<div class='name'><a href='/orgs/{{slug}}'>{{name}}</a></div>
+		<div class='meta'><span class='balance'>Balance: <i class='fa fa-clock-o'></i> {{balance}}</span></div>
+		<div class='actions'>
+			
+			{{#if currentUser.canGive}}<span class='btn btn-default giveOrg' data-id='{{_id}}'><i class='fa fa-arrow-circle-right'></i> Give To Org</span>
+			{{else}}
+			<span class='btn btn-default giveUser' disabled='disabled' data-id='{{_id}}' alt="You don't have any credit to give."><i class='fa fa-arrow-circle-right'></i> Give To Org</span>
+			{{/if}}
+			<span class='btn btn-default requestUser' data-id='{{_id}}'><i class='fa fa-arrow-circle-left'></i> Request From Org</span> 			<span class='btn btn-default toggleFavoriteOrg' data-id='{{_id}}'>{{#if isFavoriteOrg _id}}<i class='fa fa-heart'></i>{{else}}<i class='fa fa-heart-o'></i>{{/if}} Favorite</span>
+		</div>
+	</div>
+
+</div>
+	</div>
+</div>
+</template>

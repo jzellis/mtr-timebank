@@ -1,0 +1,36 @@
+<template name='userProfile'>
+	<div class='userProfile panel panel-default' data-id='{{_id}}'>
+		<div class='panel-body'>
+		<div class='row'><div class='col-md-4'>
+			<a href='/users/{{username}}'><img class='img-responsive avatar' src='{{profile.avatar}}'></a>
+		</div>
+		<div class='col-md-8'>
+			<div class='displayName'><span class='username'><a href='/users/{{username}}'>{{username}}</a></span> <span class='small text-muted'>{{profile.name}}</span></div>
+		<div class='meta'><span class='balance'>Balance: <i class='fa fa-clock-o'></i> {{profile.balance}}</span></div>
+		<div class='actions'>
+			{{#unless isMe _id}}
+			{{#if currentUser.canGive}}<span class='btn btn-default giveUser' data-id='{{_id}}'><i class='fa fa-arrow-circle-right'></i> Give To User</span>
+			{{else}}
+			<span class='btn btn-default giveUser' disabled='disabled' data-id='{{_id}}' alt="You don't have any credit to give."><i class='fa fa-arrow-circle-right'></i> Give To User</span>
+			{{/if}}
+			<span class='btn btn-default requestUser' data-id='{{_id}}'><i class='fa fa-arrow-circle-left'></i> Request From User</span> 			<span class='btn btn-default toggleFavoriteUser' data-id='{{_id}}'>{{#if isFavoriteUser _id}}<i class='fa fa-heart'></i>{{else}}<i class='fa fa-heart-o'></i>{{/if}} Favorite</span>
+
+			{{/unless}}
+
+		</div>
+	</div>
+
+</div>
+			{{#if isMe _id}}
+			<div class='row'>
+				<div class='col-md-12'>
+			<div class='userTools'>
+				<span class='btn btn-default myTransactions'><i class='fa fa-credit-card'></i> Transactions</span> <span class='btn btn-default myOrgs'><i class='fa fa-users'></i> Orgs</span> <span class='btn btn-default settings'><i class='fa fa-gear'></i> Settings</span>
+
+			</div>
+		</div>
+	</div>
+			{{/if}}
+	</div>
+</div>
+</template>
