@@ -1,0 +1,1 @@
+This is a timebanking app written in Meteor.
