@@ -1,0 +1,40 @@
+<template name='requestOrg'>
+<div class="modal fade" id='requestOrg'>
+    <form>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"><i class='fa fa-clock-o'></i> Request time from <strong>{{name}}</strong></h4>
+                </div>
+                <div class="modal-body">
+                    <div class='userProfile' data-id='{{_id}}'>
+                        <div class='row'><div class='col-md-4'>
+                            <a href='/orgs/{{slug}}'><img class='img-responsive avatar' src='{{avatar}}'></a>
+                        </div>
+                        <div class='col-md-8'>
+                            <div class='displayName'><a href='/orgs/{{slug}}'>{{name}}</a></div>
+                            <div class='meta'><span class='balance'>Balance: <i class='fa fa-clock-o'></i> {{balance}}</span></div>
+                            <hr>
+                            <fieldset class='form-group'>
+                                <label for='amount'>Request from {{name}}</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class='fa fa-clock-o'></i></div>
+                                    <input type='hidden' id='orgId' value='{{_id}}'>
+                                    <input type="text" class="form-control" id="amount" autocomplete="off" placeholder="Amount in half hour increments">
+                                </div>
+                            </fieldset>
+                            <p>Your request will be sent to the organization.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary"><i class='fa fa-clock-o'></i> Request Time</button>
+            </div>
+            </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </form>
+        </div><!-- /.modal -->
+        </template>

@@ -61,7 +61,79 @@ $('#giveOrg').modal();
 
 });
 
+$(document.body).on('click', '.requestUser', function(e){
+
+	if($(e.currentTarget).attr('disabled') != 'disabled'){
+
+id = $(e.currentTarget).attr('data-id');
+
+user = Meteor.users.findOne({_id: id});
+$("#modals").html('');
+Blaze.renderWithData(Template.requestUser, user, $('#modals')[0]);
+$('#requestUser').modal();
+
+}
+
 });
+
+$(document.body).on('click', '.requestOrg', function(e){
+
+	if($(e.currentTarget).attr('disabled') != 'disabled'){
+
+id = $(e.currentTarget).attr('data-id');
+
+org = Orgs.findOne({_id: id});
+$("#modals").html('');
+Blaze.renderWithData(Template.requestOrg, org, $('#modals')[0]);
+$('#requestOrg').modal();
+
+}
+
+});
+
+$(document.body).on('click', '.approveTransaction', function(e){
+
+id = $(e.currentTarget).attr('data-id');
+Meteor.call("approveTransactionUser", id, function(err){
+
+
+
+});
+
+});
+
+
+});
+
+// Configure accounts-ui
+
+Accounts.ui.config({
+    requestPermissions: {},
+    passwordSignupFields: 'USERNAME_AND_EMAIL',
+    extraSignupFields: [{
+        fieldName: 'name',
+        fieldLabel: 'Name',
+        inputType: 'text',
+        visible: true,
+        validate: function(value, errorFunction) {
+          if (!value) {
+            errorFunction("Please enter your name");
+            return false;
+          } else {
+            return true;
+          }
+        }
+    }]
+});
+
+// What happens when the user logs out
+
+accountsUIBootstrap3.logoutCallback = function(error) {
+  if(error) console.log("Error:" + error);
+  Router.go('/');
+}
+
+//On startup
 
 
 Meteor.startup(function () {

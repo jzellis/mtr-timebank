@@ -1,0 +1,23 @@
+<template name='transaction'>
+		
+<div class='transaction panel panel-default'>
+	<div class="panel-heading"><div class='row'><div class='col-md-6'>{{#if fromMe}}<i class='fa fa-arrow-circle-right'></i> {{/if}}{{#if toMe}}<i class='fa fa-arrow-circle-left'></i> {{/if}}<i class='fa fa-clock-o'></i> {{amount}}</div><div class='col-md-6 text-right'>{{formattedTime createdAt}}</div></div></div>
+	<div class='panel-body {{#if iCanApprove}}bg-warning{{/if}}'>
+		{{#if fromTheUser}}
+		<div><i class='fa fa-user'></i> <b>From</b> <a href='/users/{{fromTheUser.username}}'>{{fromTheUser.username}}</a></div>
+		{{/if}}
+		{{#if fromTheOrg}}
+		<div><i class='fa fa-users'></i> <b>From</b> <a href='/orgs/{{fromTheOrg.name}}'>{{fromTheOrg.name}}</a></div>
+		{{/if}}
+		{{#if toTheUser}}
+		<div><i class='fa fa-user'></i> <b>To</b> <a href='/users/{{toTheUser.username}}'>{{toTheUser.username}}</a></div>
+		{{/if}}
+		{{#if toTheOrg}}
+		<div><i class='fa fa-users'></i> <b>To</b> <a href='/orgs/{{toTheOrg.name}}'>{{toTheOrg.name}}</a></div>
+		{{/if}}
+		{{#if iCanApprove}}
+		<div class='row'><div class='col-md-12 text-right'><span class='btn btn-default approveTransaction' data-id='{{_id}}'><i class='fa fa-check'></i> Approve Transaction</span></div></div>
+		{{/if}}
+	</div>
+</div>
+</template>

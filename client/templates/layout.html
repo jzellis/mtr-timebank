@@ -1,7 +1,10 @@
 <template name="layout">
 <nav class="navbar navbar-default">
 <div class='container-fluid'>
-  <a class="navbar-brand" href="#"><i class='fa fa-clock-o'></i> Timebank</a>
+  <a class="navbar-brand" href="/"><i class='fa fa-clock-o'></i> Timebank</a>
+  <ul class="nav navbar-nav navbar-right">
+            {{> loginButtons}} <!-- here -->
+        </ul>
 </div>
 </nav>
 <div class='container-fluid main'>
