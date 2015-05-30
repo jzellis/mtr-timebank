@@ -375,6 +375,46 @@ Meteor.methods({
     },
     "removeUserFromOrg": function(oId,uId){
         Roles.remove({orgId: oId, userId: uId});
+        return true;
+    },
+    "sendUserOrgInvite" : function(orgId,email){
+        to = email;
+        from = "noreply@thetimebank.org";
+
+        user = Meteor.users.findOne({"emails.0.address": email});
+        org = Orgs.findOne({_id: orgId});
+        if(user){
+            Roles.insert({orgId: orgId, userId: user._id, admin: false, contact: false});
+            subject = "You've been added to the org " + org.name + " on the timebank";
+            SSR.compileTemplate('userOrgAddedEmail', Assets.getText('templates/userOrgAddedEmail.html'));
+
+    body = SSR.render('userOrgAddedEmail', {
+        org: org,
+        sender: Meteor.user()
+    });
+        }else{
+            rid = Roles.insert({orgId: org._id, accepted: false, admin: false, contact: false});
+            SSR.compileTemplate("userInviteEmail", Assets.getText("templates/userInviteEmail.html"));
+
+                body = SSR.render('userInviteEmail', {
+                    token: rid,
+        org: org,
+        creator: Meteor.users.findOne({_id: org.creatorId}),
+        server: Meteor.absoluteUrl()
+    });
+                subject = "You've been invited to join the org " + org.name + " on the timebank!";
+
+        }
+
+        Email.send({
+        from: from,
+        to: to,
+        subject: subject,
+        text: body
+    });
+
+
+
     }
 
 });

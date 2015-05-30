@@ -29,6 +29,7 @@ Template.org.events({
  
     	Meteor.call("updateOrg", $('input[name="orgId"]').val(), org, function(err,data){
     		if(err) sAlert.error(err.reason);
+            sAlert.success("Org updated");
     	});
 
     },
@@ -51,6 +52,14 @@ Template.org.events({
             if(confirm("Are you sure you want to remove this user from your org?")){
                 Meteor.call("removeUserFromOrg", $('input[name="orgId"]').val(), $(e.currentTarget).attr('data-id'));
             }
-    }
+    },
 
+
+    'submit form#inviteUser' : function(e){
+        e.preventDefault();
+        Meteor.call("sendUserOrgInvite", $('input[name="orgId"]').val(), $('input[name="inviteEmail"]').val(), function(err){
+            if(err) sAlert.error(err.reason);
+            sAlert.success("User invited!");
+        })
+    }
 })

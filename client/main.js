@@ -133,6 +133,7 @@ accountsUIBootstrap3.logoutCallback = function(error) {
   Router.go('/');
 }
 
+
 //On startup
 
 

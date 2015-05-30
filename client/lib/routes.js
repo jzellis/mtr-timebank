@@ -18,6 +18,12 @@ if(Meteor.user()){
 
 });
 
+Router.route('/signup/:token', function(){
+
+token = this.params.token;
+this.render('inviteSignup', {data: {token:token}});
+
+});
 
 
 Router.route('/users/:username', function () {

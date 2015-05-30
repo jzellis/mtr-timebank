@@ -28,7 +28,7 @@ id = Accounts.createUser({
 	}
 });
 
-Roles.insert({orgId: "system", userId: id, admin: true, contact: true});
+Roles.insert({orgId: "system", userId: id, admin: true, contact: true, accepted: true});
 Accounts.sendEnrollmentEmail(id);
 
 
@@ -45,7 +45,7 @@ idb = Accounts.createUser({
 	}
 });
 
-Roles.insert({orgId: "system", userId: idb, admin: true, contact: true});
+Roles.insert({orgId: "system", userId: idb, admin: true, contact: true, accepted: true});
 
 Accounts.sendEnrollmentEmail(idb);
 
@@ -73,8 +73,8 @@ orgId = Orgs.insert({
 	approvedAt: new Date()
 });
 
-Roles.insert({orgId: orgId, userId: id, admin: true,contact:true});
-Roles.insert({orgId: orgId, userId: idb, admin: true,contact:true});
+Roles.insert({orgId: orgId, userId: id, admin: true,contact:true, accepted: true});
+Roles.insert({orgId: orgId, userId: idb, admin: true,contact:true, accepted: true});
 
 }
 

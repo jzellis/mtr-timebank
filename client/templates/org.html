@@ -1,7 +1,9 @@
 <template name='org'>
 <div class='col-md-6'>
     {{#unless org.amIAdmin}}
+    {{#with org}}
     {{> orgProfile}}
+    {{/with}}
     {{else}}
     <form id='updateOrg'>
     	<input type='hidden' name='orgId' value='{{org._id}}'>
