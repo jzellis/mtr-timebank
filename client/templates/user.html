@@ -10,11 +10,17 @@
 <div class='col-md-6'>
 	<div class='panel panel-default'>
 		<div class='panel-body'>
-			<h2>Your Profile</h2>
+			<h2>My Profile</h2>
 {{> editUser}}
 </div></div>
+<div class='myOrgs'>
+	<h2>My Orgs</h2>
+	{{#each currentUser.orgs}}
+	{{> orgProfileCompact}}
+	{{/each}}
+	</div>
 </div>
-<div class='col-md-6'>
+<div class='col-md-4 col-md-offset-2'>
 	<h3>Transactions</h3>
 	{{#each currentUser.transactions "all"}}
 	{{> transaction}}

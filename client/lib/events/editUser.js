@@ -22,6 +22,7 @@ Template.editUser.events({
     		"emails.0.address": $('input[name="email"]').val(),
     		"profile.name" : $('input[name="name"]').val(),
     		"profile.avatar" : $('img.avatar').attr('src'),
+    		"profile.url" : $('input[name="url"]').val()
     		
 
     	};

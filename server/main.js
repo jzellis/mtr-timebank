@@ -1,7 +1,8 @@
 Accounts.onCreateUser(function(options, user) {
   if (options.profile){
   	if(!options.profile.avatar) options.profile.avatar = "/avatar.png";
-  	options.profile.balance = 0;
+
+  	if(!options.profile.balance) options.profile.balance = 0;
   	options.profile.favoriteUsers = [];
   	options.profile.favoriteOrgs = [];
     user.profile = options.profile;
@@ -20,13 +21,14 @@ id = Accounts.createUser({
 	profile: {
 		avatar: "/avatar.png",
 		name: "Joshua Ellis",
+		url: "http://www.zenarchery.com",
 		balance: 1000,
 		favoriteUsers: [],
 		favoriteOrgs: []
 	}
 });
 
-Roles.insert({orgId: "system", userId: id, admin: true});
+Roles.insert({orgId: "system", userId: id, admin: true, contact: true});
 Accounts.sendEnrollmentEmail(id);
 
 
@@ -36,13 +38,14 @@ idb = Accounts.createUser({
 	profile: {
 		avatar: "/avatar.png",
 		name: "David Anderson",
+		url: "http://www.pornhub.com",
 		balance: 1000,
 		favoriteUsers: [],
 		favoriteOrgs: []
 	}
 });
 
-Roles.insert({orgId: "system", userId: idb, admin: true});
+Roles.insert({orgId: "system", userId: idb, admin: true, contact: true});
 
 Accounts.sendEnrollmentEmail(idb);
 
@@ -64,7 +67,10 @@ orgId = Orgs.insert({
 	slug: "test-org",
 	avatar: "/org.png",
 	description: "This is a test organization.",
-	balance: 0
+	url: "http://www.zenarchery.com",
+	balance: 0,
+	createdAt: new Date(),
+	approvedAt: new Date()
 });
 
 Roles.insert({orgId: orgId, userId: id, admin: true,contact:true});

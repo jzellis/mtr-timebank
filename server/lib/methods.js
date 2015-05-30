@@ -1,4 +1,33 @@
 // Functions for methods because I can't figure out Meteor's annoying load order
+
+sendOrgCreateRequestEmail = function(org) {
+
+    admins = Roles.find({orgId: "system", contact: true});
+
+    admins.forEach(function(admin){
+
+    r = Meteor.users.findOne({_id: admin.userId});
+
+    to = r.emails[0].address;
+    from = "noreply@thetimebank.org";
+    subject = "New org request on timebank";
+    SSR.compileTemplate('orgCreateRequestEmail', Assets.getText('templates/orgCreateRequestEmail.html'));
+    body = SSR.render('orgCreateRequestEmail', {
+        org: org,
+        creator: Meteor.users.findOne({_id: org.creatorId}),
+        server: Meteor.absoluteUrl()
+    });
+    Email.send({
+        from: from,
+        to: to,
+        subject: subject,
+        text: body
+    });
+
+});
+}
+
+
 sendGiveUserEmail = function(r, s, t) {
     transaction = Transactions.findOne({
         _id: t
@@ -166,7 +195,7 @@ Meteor.methods({
         orgs = Orgs.find({
             $text: {
                 $search: q
-            }
+            }, approvedAt: {$ne: null}
         }).fetch();
         return {
             users: users,
@@ -289,7 +318,25 @@ Meteor.methods({
     "approveTransactionUser" : function(id){
 
     	t = Transactions.findOne({_id: id});
+ 		recipient = t.toTheUser();
     	if(t.fromUser == Meteor.userId()){
+    		amount = (Math.round(t.amount * 2) / 2).toFixed(2);
+            recipientNewBalance = parseFloat(recipient.profile.balance) + parseFloat(amount);
+            myNewBalance = parseFloat(Meteor.user().profile.balance) - parseFloat(amount);
+            Meteor.users.update({
+                _id: Meteor.userId()
+            }, {
+                $set: {
+                    "profile.balance": myNewBalance
+                }
+            });
+            Meteor.users.update({
+                _id: recipient._id
+            }, {
+                $set: {
+                    "profile.balance": recipientNewBalance
+                }
+            });
     		Transactions.update({_id: id},{$set: {completedAt: new Date()}});
     		sendApprovalEmailUser(t);
     		return true;
@@ -306,5 +353,28 @@ Meteor.methods({
     	}
     	return true;
 
+    },
+
+    "createOrg" : function(org){
+
+        org.creatorId = Meteor.userId();
+        org.createdAt = new Date();
+        org.approvedAt = null;
+        Orgs.insert(org);
+        sendOrgCreateRequestEmail(org);
+        return true;
+
+
+    },
+        "updateOrg" : function(orgId, org){
+
+                Orgs.update({_id:orgId},{$set: org});
+
+        return true;
+
+    },
+    "removeUserFromOrg": function(oId,uId){
+        Roles.remove({orgId: oId, userId: uId});
     }
+
 });

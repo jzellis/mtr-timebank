@@ -3,8 +3,21 @@
 <div class='container-fluid'>
   <a class="navbar-brand" href="/"><i class='fa fa-clock-o'></i> Timebank</a>
   <ul class="nav navbar-nav navbar-right">
-            {{> loginButtons}} <!-- here -->
-        </ul>
+            {{#if currentUser}}
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><b>{{currentUser.username}}</b> | <i class='fa fa-clock-o'></i> {{currentUser.profile.balance}} <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+            <li><a href="/"><i class='fa fa-home'></i> Home</a></li>
+            <li><a href="/users/{{currentUser.username}}"><i class='fa fa-user'></i> Profile</a></li>
+            <li class="divider"></li>
+            <li><a href='/createOrg'><i class='fa fa-users'></i> Create An Org</a></li>
+            <li><a class='logout'>Logout</a></li>
+          </ul>
+            </li>
+
+            {{/if}}
+<!--             {{> loginButtons}} -->        
+</ul>
 </div>
 </nav>
 <div class='container-fluid main'>

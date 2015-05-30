@@ -1,4 +1,4 @@
-Template.addUser.events({
+Template.createOrg.events({
 
     'click img.avatar' : function(e){
         $('input[name="avatarUpload"]').trigger('click');
@@ -18,26 +18,23 @@ Template.addUser.events({
     'submit form' : function(e){
     	e.preventDefault();
 
-    	Accounts.createUser({
-            username : $('input[name="username"]').val(),
-    		email: $('input[name="email"]').val(),
-            password: $('input[name="password"]').val(),
-    		profile: {
-            name : $('input[name="name"]').val(),
-    		avatar : $('img.avatar').attr('src'),
+        org = {
+                        name : $('input[name="name"]').val(),
+            avatar : $('img.avatar').attr('src'),
             url : $('input[name="url"]').val(),
+            description: $('textarea[name="description"]').val(),
             balance: 0,
             favoriteUsers: [],
             favoriteOrgs: []
-        }
-    		
+        };
 
-    	}, function(err){
-            if(err){ sAlert.error(err.reason);
-            }else{
-                Router.go("/");
-            }
-        })
+    Meteor.call("createOrg", org, function(err,data){
+
+        Router.go('/');
+
+
+
+    });
     }	
 
 })
