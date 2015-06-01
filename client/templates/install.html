@@ -1,0 +1,59 @@
+<template name='install'>
+	<h1 class='text-center'>Setup Your Timebank</h1>
+
+	<div class='col-md-6 col-md-offset-3'>
+		<form>
+			<h3>Your admin account</h3>
+	<div class='col-md-4'>
+		<img class='img-responsive avatar' src='/avatar.png'>
+		<div class='small text-center'>Click avatar to update</div>
+		<input type='file' name='avatarUpload' class='hidden form-control avatarUpload'>
+	</div>
+	<div class='col-md-8'>
+	<fieldset class='form-group'>
+		<label for='username'>Username</label>
+		<input class='form-control username' name='username' >
+	</fieldset>
+	<fieldset class='form-group'>
+		<label for='name'>Name</label>
+		<input class='form-control name' name='name'>
+	</fieldset>
+	<fieldset class='form-group'>
+		<label for='password'>New Password</label>
+		<input type='password' class='form-control password' name='password'>
+	</fieldset>
+		<fieldset class='form-group'>
+		<label for='email'>Email</label>
+		<input type='email' class='form-control email' name='email'>
+	</fieldset>
+		<fieldset class='form-group'>
+		<label for='url'>URL</label>
+		<input class='form-control url' name='url'>
+	</fieldset>
+		<fieldset class='form-group'>
+		<label for='balance'>Your initial balance</label>
+		<input class='form-control balance' name='balance' value='0'>
+	</fieldset>	
+
+</div>
+	<hr>
+	<h3>Site Info</h3>
+		<fieldset class='form-group'>
+		<label for='sitename'>Site Name</label>
+		<input class='form-control sitename' name='sitename' >
+	</fieldset>
+		<fieldset class='form-group'>
+		<label for='currency'>Site Currency Name - Singular</label>
+		<input class='form-control currency' name='currency' placeholder='i.e. "Hour"'>
+	</fieldset>
+		<fieldset class='form-group'>
+		<label for='currency'>Site Currency Name - Plural</label>
+		<input class='form-control currency' name='currency' placeholder='i.e. "Hours"'>
+	</fieldset>
+
+	<fieldset class='form-group text-right'>
+		<button type='submit' class='btn btn-default'><i class='fa fa-check'></i> Finish Site Setup</button>
+	</fieldset>
+</form>
+</div>
+</template>

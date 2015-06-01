@@ -1,0 +1,24 @@
+<template name='admin'>
+<h1>{{siteName}} - Admin</h1>
+<div class='col-md-4'>
+<ul>
+	<li>Num Users: {{numUsers}}</li>
+	<li>Num Orgs: {{numOrgs}}</li>
+</ul>
+</div>
+<div class='col-md-4'>
+	<h3>Pending Orgs</h3>
+	<ul class='list-unstyled'>
+	{{#each pendingOrgs}}
+	<li class='row'><div class='col-md-3'><img src='{{avatar}}' class='img-responsive'></div><div class='col-md-5'><b>{{name}}</b><br>
+		<b>Creator</b> <a href='/users/{{creator.username}}'>{{creator.username}}</a><br><b>Description</b><br>{{{description}}}</div><div class='col-md-4'><span class='approveOrg btn btn-default' data-id='{{_id}}'>Approve</span></div></li>
+	{{/each}}
+</ul>
+</div>
+<div class='col-md-4'>
+	<h3>Transactions</h3>
+	{{#each transactions}}
+	{{> transaction}}
+	{{/each}}
+</div>
+</template>

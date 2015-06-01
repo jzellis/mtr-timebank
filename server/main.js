@@ -13,69 +13,69 @@ Accounts.onCreateUser(function(options, user) {
 
 Meteor.startup(function(){
 
-if(Meteor.users.find({}).count() === 0){
+// if(Meteor.users.find({}).count() === 0){
 
-id = Accounts.createUser({
-	username: "jzellis",
-	email: "jzellis@gmail.com",
-	profile: {
-		avatar: "/avatar.png",
-		name: "Joshua Ellis",
-		url: "http://www.zenarchery.com",
-		balance: 1000,
-		favoriteUsers: [],
-		favoriteOrgs: []
-	}
-});
+// id = Accounts.createUser({
+// 	username: "jzellis",
+// 	email: "jzellis@gmail.com",
+// 	profile: {
+// 		avatar: "/avatar.png",
+// 		name: "Joshua Ellis",
+// 		url: "http://www.zenarchery.com",
+// 		balance: 1000,
+// 		favoriteUsers: [],
+// 		favoriteOrgs: []
+// 	}
+// });
 
-Roles.insert({orgId: "system", userId: id, admin: true, contact: true, accepted: true});
-Accounts.sendEnrollmentEmail(id);
+// Roles.insert({orgId: "system", userId: id, admin: true, contact: true, accepted: true});
+// Accounts.sendEnrollmentEmail(id);
 
 
-idb = Accounts.createUser({
-	username: "xopug",
-	email: "davidryal@gmail.com",
-	profile: {
-		avatar: "/avatar.png",
-		name: "David Anderson",
-		url: "http://www.pornhub.com",
-		balance: 1000,
-		favoriteUsers: [],
-		favoriteOrgs: []
-	}
-});
+// idb = Accounts.createUser({
+// 	username: "xopug",
+// 	email: "davidryal@gmail.com",
+// 	profile: {
+// 		avatar: "/avatar.png",
+// 		name: "David Anderson",
+// 		url: "http://www.pornhub.com",
+// 		balance: 1000,
+// 		favoriteUsers: [],
+// 		favoriteOrgs: []
+// 	}
+// });
 
-Roles.insert({orgId: "system", userId: idb, admin: true, contact: true, accepted: true});
+// Roles.insert({orgId: "system", userId: idb, admin: true, contact: true, accepted: true});
 
-Accounts.sendEnrollmentEmail(idb);
+// Accounts.sendEnrollmentEmail(idb);
 
-Accounts.createUser({
-	username: "testuser",
-	email: "test@testuser.com",
-	password: "testy12345",
-	profile: {
-		avatar: "/avatar.png",
-		name: "Test User",
-		balance: 0,
-		favoriteUsers: [],
-		favoriteOrgs: []
-	}
-});
+// Accounts.createUser({
+// 	username: "testuser",
+// 	email: "test@testuser.com",
+// 	password: "testy12345",
+// 	profile: {
+// 		avatar: "/avatar.png",
+// 		name: "Test User",
+// 		balance: 0,
+// 		favoriteUsers: [],
+// 		favoriteOrgs: []
+// 	}
+// });
 
-orgId = Orgs.insert({
-	name: "Test Org",
-	slug: "test-org",
-	avatar: "/org.png",
-	description: "This is a test organization.",
-	url: "http://www.zenarchery.com",
-	balance: 0,
-	createdAt: new Date(),
-	approvedAt: new Date()
-});
+// orgId = Orgs.insert({
+// 	name: "Test Org",
+// 	slug: "test-org",
+// 	avatar: "/org.png",
+// 	description: "This is a test organization.",
+// 	url: "http://www.zenarchery.com",
+// 	balance: 0,
+// 	createdAt: new Date(),
+// 	approvedAt: new Date()
+// });
 
-Roles.insert({orgId: orgId, userId: id, admin: true,contact:true, accepted: true});
-Roles.insert({orgId: orgId, userId: idb, admin: true,contact:true, accepted: true});
+// Roles.insert({orgId: orgId, userId: id, admin: true,contact:true, accepted: true});
+// Roles.insert({orgId: orgId, userId: idb, admin: true,contact:true, accepted: true});
 
-}
+// }
 
 });

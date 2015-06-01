@@ -36,3 +36,29 @@ Router.route('/orgs/:slug', function () {
 org =	Orgs.findOne({slug: this.params.slug});
   this.render('org',{data: {org: org}});
 });
+
+
+Router.route('/admin', function () {
+// this.wait(Meteor.subscribe('users'));	
+if(this.ready()){
+if(Meteor.users.find().count() === 0){
+this.render('install');
+}else{
+	pendingOrgs = Orgs.find({approvedAt: null});
+	numUsers = Meteor.users.find().count();
+	numOrgs = Orgs.find({approvedAt: {$ne: null}}).count()
+	transactions = Transactions.find({},{skip: 0, limit: 25})
+  this.render('admin', {
+  	data: {
+  		pendingOrgs: pendingOrgs,
+  		numUsers: numUsers,
+  		numOrgs: numOrgs,
+  		transactions: transactions
+
+  	}});
+
+}
+
+}
+
+});
