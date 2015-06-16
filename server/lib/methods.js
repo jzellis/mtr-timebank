@@ -186,8 +186,23 @@ sendApprovalEmailOrg = function(t) {
 
 // Actual methods
 Meteor.methods({
+    "installSite" : function(site){
+            Roles.insert({orgId: "system", userId: Meteor.userId(), admin: true, contact: true, accepted: true});
+
+
+
+
+siteConfig.insert({name: "name", value: site.name});
+siteConfig.insert({name: "currency", value: site.currency});
+siteConfig.insert({name: "currencyPlural", value: site.currencyPlural});
+siteConfig.insert({name: "currencySymbol", value: site.currencySymbol});
+
+return true;
+
+    },
     "search": function(q) {
         users = Meteor.users.find({
+            
             $text: {
                 $search: q
             }

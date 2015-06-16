@@ -3,8 +3,10 @@ Accounts.onCreateUser(function(options, user) {
   	if(!options.profile.avatar) options.profile.avatar = "/avatar.png";
 
   	if(!options.profile.balance) options.profile.balance = 0;
-  	options.profile.favoriteUsers = [];
-  	options.profile.favoriteOrgs = [];
+  	options.profile.favorites = {
+  		users: [],
+  		orgs: []
+  	};
     user.profile = options.profile;
 }
   return user;

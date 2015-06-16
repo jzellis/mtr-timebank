@@ -10,10 +10,6 @@
 	</div>
 	<div class='col-md-6'>
 		<div class='actions text-right'>
-			{{#if currentUser.canGive}}<span class='btn btn-default giveOrg' data-id='{{_id}}'><i class='fa fa-arrow-circle-right'></i></span>
-			{{else}}
-			<span class='btn btn-default giveOrg' disabled='disabled' data-id='{{_id}}' alt="You don't have any credit to give."><i class='fa fa-arrow-circle-right'></i></span>
-			{{/if}}
 			<span class='btn btn-default requestOrg' data-id='{{_id}}'><i class='fa fa-arrow-circle-left'></i></span> 			<span class='btn btn-default toggleFavoriteOrg' data-id='{{_id}}'>{{#if isFavoriteOrg _id}}<i class='fa fa-heart'></i>{{else}}<i class='fa fa-heart-o'></i>{{/if}}</span>
 
 

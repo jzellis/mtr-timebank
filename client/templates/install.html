@@ -33,7 +33,14 @@
 		<fieldset class='form-group'>
 		<label for='balance'>Your initial balance</label>
 		<input class='form-control balance' name='balance' value='0'>
+		<p class='small'>This only applies to your account as the site creator, not to all accounts.</p>
 	</fieldset>	
+		<fieldset class='form-group'>
+		<label for='tags'>Your tags</label>
+		<input class='form-control tagInput' name='tags'>
+		<p class='small'>A comma-separated list of tags other users can search for you with.</p>
+	</fieldset>	
+
 
 </div>
 	<hr>
@@ -43,12 +50,16 @@
 		<input class='form-control sitename' name='sitename' >
 	</fieldset>
 		<fieldset class='form-group'>
-		<label for='currency'>Site Currency Name - Singular</label>
+		<label for='currency'>Currency Name - Singular</label>
 		<input class='form-control currency' name='currency' placeholder='i.e. "Hour"'>
 	</fieldset>
 		<fieldset class='form-group'>
-		<label for='currency'>Site Currency Name - Plural</label>
-		<input class='form-control currency' name='currency' placeholder='i.e. "Hours"'>
+		<label for='currency'>Currency Name - Plural</label>
+		<input class='form-control currencyPlural' name='currencyPlural' placeholder='i.e. "Hours"'>
+	</fieldset>
+		<fieldset class='form-group'>
+		<label for='currencySymbol'>Currency Symbol</label>
+		<input class='form-control currencySymbol' name='currencySymbol' placeholder='i.e. $'>
 	</fieldset>
 
 	<fieldset class='form-group text-right'>

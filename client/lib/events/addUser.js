@@ -27,8 +27,9 @@ Template.addUser.events({
     		avatar : $('img.avatar').attr('src'),
             url : $('input[name="url"]').val(),
             balance: 0,
-            favoriteUsers: [],
-            favoriteOrgs: []
+            favorites:{users: [],
+            orgs: []
+        }
         }
     		
 

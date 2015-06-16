@@ -14,25 +14,29 @@ Accounts.createUser({
     		avatar : $('img.avatar').attr('src'),
             url : $('input[name="url"]').val(),
             balance: $('input[name="balance"]').val(),
-            favoriteUsers: [],
-            favoriteOrgs: []
+            tags: $('input.tagInput').tagsinput('items'),
+            favorites: {
+                users: [],
+            orgs: []
+        }
         }
         }, function(){
 
-        	Roles.insert({orgId: "system", userId: Meteor.userId(), admin: true, contact: true, accepted: true});
+            site = {
+    name: $('input[name="sitename"]').val(),
+    currency: $('input[name="currency"]').val(),
+    currencyPlural: $('input[name="currencyPlural"]').val(),
+    currencySymbol: $('input[name="currencySymbol"]').val()
 
+}
+
+            Meteor.call("installSite", site, function(e,d){
+                Router.go("/admin");
+            })
         });
 
 
-site = {
-	name: $('input[name="sitename"]').val(),
-	currency: $('input[name="currency"]').val(),
-	currencyPlural: $('input[name="currencyPlural"]').val()
-}
 
-siteConfig.insert({name: "name", value: site.name});
-siteConfig.insert({name: "currency", value: site.currency});
-siteConfig.insert({name: "currencyPlural", value: site.currencyPlural});
 
 }
 

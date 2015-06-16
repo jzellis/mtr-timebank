@@ -1,6 +1,13 @@
 Template.registerHelper("siteName", function(){
-	
-return siteConfig.findOne({name: "name"}).value;
+	      	if(siteConfig.findOne({name: "name"})) return siteConfig.findOne({name: "name"}).value;
+
+
+
+});
+
+Template.registerHelper("config", function(opt){
+	      	if(siteConfig.findOne({name: opt})) return siteConfig.findOne({name: opt}).value;
+
 
 
 });

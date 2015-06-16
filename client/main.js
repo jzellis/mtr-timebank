@@ -6,10 +6,12 @@ $(document).ready(function(){
 $(document.body).on('click', '.toggleFavoriteUser', function(e){
 
 uid = $(e.currentTarget).attr('data-id');
-	if(Meteor.user().profile.favoriteUsers.indexOf(uid) === -1){
-	Meteor.users.update({_id: Meteor.userId()},{$push: {"profile.favoriteUsers": uid}})
+	if(Meteor.user().profile.favorites.users.indexOf(uid) === -1){
+	Meteor.users.update({_id: Meteor.userId()},{$push: {"profile.favorites.users": uid}}, function(){
+    console.log(arguments);
+  })
 	}else{
-	Meteor.users.update({_id: Meteor.userId()},{$pull: {"profile.favoriteUsers": uid}})
+	Meteor.users.update({_id: Meteor.userId()},{$pull: {"profile.favorites.users": uid}})
 
 	}
 
@@ -19,10 +21,10 @@ uid = $(e.currentTarget).attr('data-id');
 $(document.body).on('click', '.toggleFavoriteOrg', function(e){
 
 id = $(e.currentTarget).attr('data-id');
-	if(Meteor.user().profile.favoriteOrgs.indexOf(id) === -1){
-	Meteor.users.update({_id: Meteor.userId()},{$push: {"profile.favoriteOrgs": id}})
+	if(Meteor.user().profile.favorites.orgs.indexOf(id) === -1){
+	Meteor.users.update({_id: Meteor.userId()},{$push: {"profile.favorites.orgs": id}})
 	}else{
-	Meteor.users.update({_id: Meteor.userId()},{$pull: {"profile.favoriteOrgs": id}})
+	Meteor.users.update({_id: Meteor.userId()},{$pull: {"profile.favorites.orgs": id}})
 
 	}
 
@@ -46,20 +48,20 @@ $('#giveUser').modal();
 
 });
 
-$(document.body).on('click', '.giveOrg', function(e){
+// $(document.body).on('click', '.giveOrg', function(e){
 
-	if($(e.currentTarget).attr('disabled') != 'disabled'){
+// 	if($(e.currentTarget).attr('disabled') != 'disabled'){
 
-id = $(e.currentTarget).attr('data-id');
+// id = $(e.currentTarget).attr('data-id');
 
-org = Orgs.findOne({_id: id});
-$("#modals").html('');
-Blaze.renderWithData(Template.giveOrg, org, $('#modals')[0]);
-$('#giveOrg').modal();
+// org = Orgs.findOne({_id: id});
+// $("#modals").html('');
+// Blaze.renderWithData(Template.giveOrg, org, $('#modals')[0]);
+// $('#giveOrg').modal();
 
-}
+// }
 
-});
+// });
 
 $(document.body).on('click', '.requestUser', function(e){
 
@@ -136,8 +138,11 @@ accountsUIBootstrap3.logoutCallback = function(error) {
 
 //On startup
 
+Meteor.subscribe("config");
+
 
 Meteor.startup(function () {
+
 
     sAlert.config({
         html: true,

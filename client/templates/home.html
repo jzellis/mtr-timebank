@@ -16,7 +16,7 @@
     <div id="userFavs" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="userFavsHeading">
       <div class="panel-body">
       	
-      	{{#each profile.favoriteUsers}}
+      	{{#each profile.favorites.users}}
       	{{#with getUser this}}
       	{{> userProfileTiny}}
       	{{/with}}
@@ -35,7 +35,7 @@
     <div id="orgFavs" class="panel-collapse collapse" role="tabpanel" aria-labelledby="orgFavsHeading">
       <div class="panel-body">
 
-      	{{#each profile.favoriteOrgs}}
+      	{{#each profile.favorites.orgs}}
       	{{#with getOrg this}}
 {{> orgProfileTiny}}
       	{{/with}}

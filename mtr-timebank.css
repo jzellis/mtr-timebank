@@ -8,3 +8,7 @@
 	border: 1px solid #ccc;
 	margin-bottom: 5px;
 }
+
+.bootstrap-tagsinput{
+width: 100% !important; 
+}

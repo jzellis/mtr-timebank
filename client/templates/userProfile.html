@@ -6,6 +6,7 @@
 		</div>
 		<div class='col-md-8'>
 			<div class='displayName'><span class='username'><a href='/users/{{username}}'>{{username}}</a></span> <span class='small text-muted'>{{profile.name}}</span></div>
+			<div class='tags'>{{#each profile.tags}}<a href='/tags/{{this}}' class='label label-info'>{{this}}</a> {{/each}}</div>
 		<div class='meta'><span class='balance'>Balance: <i class='fa fa-clock-o'></i> {{profile.balance}}</span></div>
 		<div class='actions'>
 			{{#unless isMe _id}}
