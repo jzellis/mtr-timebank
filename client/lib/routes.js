@@ -19,7 +19,7 @@ Router.route('/', {
     name: "home",
     template: "home",
     subscriptions: function(){
-      if(Meteor.user())
+      // if(Meteor.user())
         return [
         Meteor.subscribe("myFavorites")
         ]
