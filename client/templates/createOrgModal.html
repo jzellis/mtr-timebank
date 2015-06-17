@@ -1,0 +1,22 @@
+<template name='createOrgModal'>
+<div class="modal fade" id='createOrgModal'>
+  <div class="modal-dialog">
+    <div class="modal-content">
+    <form id='createOrg'>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"><i class='fa fa-clock-o'></i><strong>Create Org</strong></h4>
+      </div>
+      <div class="modal-body">
+        {{> orgForm}}
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <!-- <button type="submit" class="btn btn-primary"><i class='fa fa-clock-o'></i> Create Org</button> -->
+      </div>
+      </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</template>

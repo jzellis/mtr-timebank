@@ -220,7 +220,7 @@ return true;
         orgs = Orgs.find({
             $text: {
                 $search: q
-            }, approvedAt: {$ne: null}
+            }
         }).fetch();
         return {
             users: users,
@@ -369,6 +369,38 @@ return true;
 
     },
 
+    "approveTransactionOrg" : function(id){
+
+        t = Transactions.findOne({_id: id});
+        console.log(t);
+        recipient = t.fromTheUser();
+        org = t.toTheOrg();
+
+        if(Meteor.user().isOrgAdmin(t.toOrg)){
+            amount = (Math.round(t.amount * 2) / 2).toFixed(2);
+            recipientNewBalance = parseFloat(recipient.profile.balance) + parseFloat(amount);
+            myNewBalance = parseFloat(org.balance) - parseFloat(amount);
+            Meteor.users.update({
+                _id: Meteor.userId()
+            }, {
+                $set: {
+                    "profile.balance": recipientNewBalance
+                }
+            });
+            Orgs.update({
+                _id: recipient._id
+            }, {
+                $set: {
+                    "balance": myNewBalance
+                }
+            });
+            Transactions.update({_id: id},{$set: {completedAt: new Date()}});
+            // sendApprovalEmailUser(t);
+            return true;
+        }
+
+    },
+
     "updateUser" : function(user){
 
     	    	Meteor.users.update({_id: Meteor.userId()},{$set: user});
@@ -398,9 +430,9 @@ return true;
 
         org.creatorId = Meteor.userId();
         org.createdAt = new Date();
-        org.approvedAt = null;
-        Orgs.insert(org);
+        oid = Orgs.insert(org);
         sendOrgCreateRequestEmail(org);
+        Roles.insert({orgId: oid, userId: Meteor.userId(), admin: true, contact: true});
         return true;
 
 

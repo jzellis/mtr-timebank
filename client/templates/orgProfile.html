@@ -8,8 +8,10 @@
 			<div class='name'><a href='/orgs/{{slug}}'>{{name}}</a></div>
 		<div class='meta'><span class='balance'>Balance: <i class='fa fa-clock-o'></i> {{balance}}</span></div>
 		<div class='actions'>
-			<span class='btn btn-default requestUser' data-id='{{_id}}'><i class='fa fa-arrow-circle-left'></i> Request From Org</span> 			<span class='btn btn-default toggleFavoriteOrg' data-id='{{_id}}'>{{#if isFavoriteOrg _id}}<i class='fa fa-heart'></i>{{else}}<i class='fa fa-heart-o'></i>{{/if}} Favorite</span>
+			<span class='btn btn-default requestOrg' data-id='{{_id}}'><i class='fa fa-arrow-circle-left'></i> Request From Org</span> 			<span class='btn btn-default toggleFavoriteOrg' data-id='{{_id}}'>{{#if isFavoriteOrg _id}}<i class='fa fa-heart'></i>{{else}}<i class='fa fa-heart-o'></i>{{/if}} Favorite</span>
 		</div>
+		<div class='url'><a href='{{url}}'>{{url}}</a></div>
+		<div class='description'>{{{description}}}</div>
 	</div>
 
 </div>

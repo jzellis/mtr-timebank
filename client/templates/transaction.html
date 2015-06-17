@@ -16,7 +16,11 @@
 		<div><i class='fa fa-users'></i> <b>To</b> <a href='/orgs/{{toTheOrg.name}}'>{{toTheOrg.name}}</a></div>
 		{{/if}}
 		{{#if iCanApprove}}
-		<div class='row'><div class='col-md-12 text-right'><span class='btn btn-default approveTransaction' data-id='{{_id}}'><i class='fa fa-check'></i> Approve Transaction</span></div></div>
+		{{#if toTheUser}}
+		<div class='row'><div class='col-md-12 text-right'><span class='btn btn-default approveTransactionUser' data-id='{{_id}}'><i class='fa fa-check'></i> Approve Transaction</span></div></div>
+		{{else}}
+		<div class='row'><div class='col-md-12 text-right'><span class='btn btn-default approveTransactionOrg' data-id='{{_id}}'><i class='fa fa-check'></i> Approve Transaction</span></div></div>	
+		{{/if}}	
 		{{/if}}
 	</div>
 </div>

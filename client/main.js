@@ -84,12 +84,14 @@ $('#requestUser').modal();
 });
 
 $(document.body).on('click', '.requestOrg', function(e){
-
+console.log('yo');
 	if($(e.currentTarget).attr('disabled') != 'disabled'){
 
 id = $(e.currentTarget).attr('data-id');
-Meteor.subscribe("orgById", id, {onReady: function(){
+Meteor.subscribe("orgById", id, {onStop: function(){console.log(arguments)},onReady: function(){
+
 org = Orgs.findOne({_id: id});
+console.log(org);
 $("#modals").html('');
 Blaze.renderWithData(Template.requestOrg, org, $('#modals')[0]);
 $('#requestOrg').modal();
@@ -98,11 +100,22 @@ $('#requestOrg').modal();
 
 });
 
-$(document.body).on('click', '.approveTransaction', function(e){
+$(document.body).on('click', '.approveTransactionUser', function(e){
 
 id = $(e.currentTarget).attr('data-id');
 Meteor.call("approveTransactionUser", id, function(err){
 
+
+
+});
+
+});
+
+$(document.body).on('click', '.approveTransactionOrg', function(e){
+
+id = $(e.currentTarget).attr('data-id');
+Meteor.call("approveTransactionOrg", id, function(err){
+console.log(arguments);
 
 
 });

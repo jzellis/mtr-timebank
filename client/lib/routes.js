@@ -33,7 +33,7 @@ Router.route('/', {
     }
   },
     data: function(){
-        return {}
+        return {orgs: Orgs.find()}
     },
     title: function() {
     },
@@ -135,7 +135,30 @@ Router.route('/admin', {
     parent: "home"
 });
 
+Router.route('/orgs/:slug', {
+    name: "org",
+    template: "org",
+    subscriptions: function(){
+      // if(Meteor.user())
+        return [
+        Meteor.subscribe("orgBySlug", this.params.slug)
+        ]
 
+    },
+    action: function () {
+    if (this.ready()) {
+      this.render();
+    } else {
+      this.render('loading');
+    }
+  },
+    data: function(){
+        return {org: Orgs.findOne()}
+    },
+    title: function() {
+    },
+    parent: "home"
+});
 
 
 // Router.route('/', function () {
