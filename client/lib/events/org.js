@@ -34,21 +34,19 @@ Template.org.events({
 
     },
 
-    'change .isAdmin' : function(e){
-        console.log($(e.currentTarget).is(":checked"));
+    'change .userList .isAdmin' : function(e){
     uid = $(e.currentTarget).attr('data-id');
-    console.log(uid);
     rid = Roles.findOne({orgId: $('input[name="orgId"]').val(), userId: $(e.currentTarget).attr('data-id')})._id;
-    console.log(rid);
     Roles.update({_id: rid}, {$set: {admin: $(e.currentTarget).is(":checked")}});
     },
-    'change .isContact' : function(e){
+    'change .userList .isContact' : function(e){
     uid = $(e.currentTarget).attr('data-id');
     rid = Roles.findOne({orgId: $('input[name="orgId"]').val(), userId: $(e.currentTarget).attr('data-id')})._id;
     Roles.update({_id: rid}, {$set: {contact: $(e.currentTarget).is(":checked")}});
 
     },
         'click .removeFromOrg' : function(e){
+            alert('yo');
             if(confirm("Are you sure you want to remove this user from your org?")){
                 Meteor.call("removeUserFromOrg", $('input[name="orgId"]').val(), $(e.currentTarget).attr('data-id'));
             }
@@ -57,7 +55,14 @@ Template.org.events({
 
     'submit form#inviteUser' : function(e){
         e.preventDefault();
-        Meteor.call("sendUserOrgInvite", $('input[name="orgId"]').val(), $('input[name="inviteEmail"]').val(), function(err){
+        newUser = {
+            email: $('input.inviteEmail').val(),
+            isAdmin: $('form#inviteUser input.isAdmin').is(':checked'),
+            isContact: $('form#inviteUser input.isContact').is(':checked')
+
+        }
+        // e.preventDefault();
+        Meteor.call("inviteUserToOrg", $('input[name="orgId"]').val(),newUser, function(err){
             if(err) sAlert.error(err.reason);
             sAlert.success("User invited!");
         })

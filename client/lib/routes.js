@@ -153,7 +153,9 @@ Router.route('/orgs/:slug', {
     }
   },
     data: function(){
-        return {org: Orgs.findOne()}
+        return {org: Orgs.findOne(),
+          orgUsers: Meteor.users.find()
+        }
     },
     title: function() {
     },

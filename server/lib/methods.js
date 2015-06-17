@@ -448,44 +448,58 @@ return true;
         Roles.remove({orgId: oId, userId: uId});
         return true;
     },
-    "sendUserOrgInvite" : function(orgId,email){
-        to = email;
-        from = "noreply@thetimebank.org";
+    // "sendUserOrgInvite" : function(orgId,email){
+    //     to = email;
+    //     from = "noreply@thetimebank.org";
 
-        user = Meteor.users.findOne({"emails.0.address": email});
-        org = Orgs.findOne({_id: orgId});
-        if(user){
-            Roles.insert({orgId: orgId, userId: user._id, admin: false, contact: false});
-            subject = "You've been added to the org " + org.name + " on the timebank";
-            SSR.compileTemplate('userOrgAddedEmail', Assets.getText('templates/userOrgAddedEmail.html'));
+    //     user = Meteor.users.findOne({"emails.0.address": email});
+    //     org = Orgs.findOne({_id: orgId});
+    //     if(user){
+    //         Roles.insert({orgId: orgId, userId: user._id, admin: false, contact: false});
+    //         subject = "You've been added to the org " + org.name + " on the timebank";
+    //         SSR.compileTemplate('userOrgAddedEmail', Assets.getText('templates/userOrgAddedEmail.html'));
 
-    body = SSR.render('userOrgAddedEmail', {
-        org: org,
-        sender: Meteor.user()
-    });
-        }else{
-            rid = Roles.insert({orgId: org._id, accepted: false, admin: false, contact: false});
-            SSR.compileTemplate("userInviteEmail", Assets.getText("templates/userInviteEmail.html"));
+    // body = SSR.render('userOrgAddedEmail', {
+    //     org: org,
+    //     sender: Meteor.user()
+    // });
+    //     }else{
+    //         rid = Roles.insert({orgId: org._id, accepted: false, admin: false, contact: false});
+    //         SSR.compileTemplate("userInviteEmail", Assets.getText("templates/userInviteEmail.html"));
 
-                body = SSR.render('userInviteEmail', {
-                    token: rid,
-        org: org,
-        creator: Meteor.users.findOne({_id: org.creatorId}),
-        server: Meteor.absoluteUrl()
-    });
-                subject = "You've been invited to join the org " + org.name + " on the timebank!";
+    //             body = SSR.render('userInviteEmail', {
+    //                 token: rid,
+    //     org: org,
+    //     creator: Meteor.users.findOne({_id: org.creatorId}),
+    //     server: Meteor.absoluteUrl()
+    // });
+    //             subject = "You've been invited to join the org " + org.name + " on the timebank!";
 
+    //     }
+
+    //     Email.send({
+    //     from: from,
+    //     to: to,
+    //     subject: subject,
+    //     text: body
+    // });
+
+
+
+    // }
+
+    inviteUserToOrg: function(orgId,user){ 
+        if(Meteor.users.findOne({"emails.0.address": user.email})){
+            usr = Meteor.users.findOne({"emails.0.address": user.email});
+            Roles.insert({orgId: orgId, userId: usr._id, admin: usr.isAdmin, contact: usr.isContact, createdAt: new Date()});
         }
-
-        Email.send({
-        from: from,
-        to: to,
-        subject: subject,
-        text: body
-    });
-
-
-
+            else{
+                newUid = Accounts.createUser({email: user.email, profile: {avatar: '/avatar.png', balance: 0, favorites: {users: [], orgs: []}}, createdAt: new Date()})
+            Roles.insert({orgId: orgId, userId: newUid, admin: user.isAdmin, contact: isContact, createdAt: new Date()});
+            Accounts.sendEnrollmentEmail(newUid);
+            return true;
+                            // Do if they're not in the system
+            }
     }
 
 });
