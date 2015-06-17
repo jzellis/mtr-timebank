@@ -1,6 +1,7 @@
 Template.addUser.events({
 
     'click img.avatar' : function(e){
+        alert('clicked');
         $('input[name="avatarUpload"]').trigger('click');
     },
     'change input[name="avatarUpload"]': function(e) {

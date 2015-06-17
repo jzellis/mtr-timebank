@@ -1,39 +1,5 @@
 <template name='addUser'>
-<form>
-	<div class='col-md-4'>
-		<img class='img-responsive avatar' src='/avatar.png'>
-		<div class='small text-center'>Click avatar to update</div>
-		<input type='file' name='avatarUpload' class='hidden form-control avatarUpload'>
-	</div>
-	<div class='col-md-8'>
-	<fieldset class='form-group'>
-		<label for='username'>Username</label>
-		<input class='form-control username' name='username' >
-	</fieldset>
-	<fieldset class='form-group'>
-		<label for='name'>Name</label>
-		<input class='form-control name' name='name'>
-	</fieldset>
-	<fieldset class='form-group'>
-		<label for='password'>New Password</label>
-		<input type='password' class='form-control password' name='password'>
-	</fieldset>
-		<fieldset class='form-group'>
-		<label for='email'>Email</label>
-		<input type='email' class='form-control email' name='email'>
-	</fieldset>
-		<fieldset class='form-group'>
-		<label for='url'>URL</label>
-		<input class='form-control url' name='url'>
-	</fieldset>
-			<fieldset class='form-group'>
-		<label for='tags'>Your tags</label>
-		<input class='form-control tags' name='tags'>
-		<p class='small'>A comma-separated list of tags other users can search for you with.</p>
-	</fieldset>	
-	<fieldset class='form-group text-right'>
-		<button type='submit' class='btn btn-default'><i class='fa fa-check'></i> Signup</button>
-	</fieldset>
-</div>
+<form id='addUser'>
+{{> userForm}}
 </form>
 </template>

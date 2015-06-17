@@ -1,19 +1,19 @@
 Template.editUser.events({
 
-    'click img.avatar' : function(e){
-        $('input[name="avatarUpload"]').trigger('click');
-    },
-    'change input[name="avatarUpload"]': function(e) {
-        file = $(e.currentTarget)[0].files[0];
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            // do stuff once it's uploaded
-            imgData = e.target.result;
-            $('img.avatar').attr('src', resizeImage(imgData, 1000, 1000));
-            // $('.uploadedCover').show();
-        }
-        reader.readAsDataURL(file);
-    },
+    // 'click img.avatar' : function(e){
+    //     $('input[name="avatarUpload"]').trigger('click');
+    // },
+    // 'change input[name="avatarUpload"]': function(e) {
+    //     file = $(e.currentTarget)[0].files[0];
+    //     var reader = new FileReader();
+    //     reader.onload = function(e) {
+    //         // do stuff once it's uploaded
+    //         imgData = e.target.result;
+    //         $('img.avatar').attr('src', resizeImage(imgData, 1000, 1000));
+    //         // $('.uploadedCover').show();
+    //     }
+    //     reader.readAsDataURL(file);
+    // },
 
     'submit form' : function(e){
     	e.preventDefault();

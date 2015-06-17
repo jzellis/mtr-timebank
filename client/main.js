@@ -38,11 +38,16 @@ $(document.body).on('click', '.giveUser', function(e){
 	if($(e.currentTarget).attr('disabled') != 'disabled'){
 
 id = $(e.currentTarget).attr('data-id');
+Meteor.subscribe("userById", id, {onReady: function(){
 
 user = Meteor.users.findOne({_id: id});
 $("#modals").html('');
 Blaze.renderWithData(Template.giveUser, user, $('#modals')[0]);
 $('#giveUser').modal();
+
+}});
+
+
 
 }
 
@@ -68,12 +73,12 @@ $(document.body).on('click', '.requestUser', function(e){
 	if($(e.currentTarget).attr('disabled') != 'disabled'){
 
 id = $(e.currentTarget).attr('data-id');
-
+Meteor.subscribe("userById", id, {onReady: function(){
 user = Meteor.users.findOne({_id: id});
 $("#modals").html('');
 Blaze.renderWithData(Template.requestUser, user, $('#modals')[0]);
 $('#requestUser').modal();
-
+}});
 }
 
 });
@@ -83,12 +88,12 @@ $(document.body).on('click', '.requestOrg', function(e){
 	if($(e.currentTarget).attr('disabled') != 'disabled'){
 
 id = $(e.currentTarget).attr('data-id');
-
+Meteor.subscribe("orgById", id, {onReady: function(){
 org = Orgs.findOne({_id: id});
 $("#modals").html('');
 Blaze.renderWithData(Template.requestOrg, org, $('#modals')[0]);
 $('#requestOrg').modal();
-
+}});
 }
 
 });
@@ -139,6 +144,7 @@ accountsUIBootstrap3.logoutCallback = function(error) {
 //On startup
 
 Meteor.subscribe("config");
+Meteor.subscribe("myRoles");
 
 
 Meteor.startup(function () {

@@ -70,12 +70,12 @@ Router.route('/users/:username', {
       subs = [
         Meteor.subscribe("userByUsername", this.params.username)
         ];
-        if(this.params.username == Meteor.user().username) subs.push(Meteor.subscribe("myTransactions"))
+        if(Meteor.user() && this.params.username == Meteor.user().username) subs.push(Meteor.subscribe("myTransactions"))
         return subs;
 
     },
     action: function () {
-    if (this.ready()) {
+    if (this.ready() && Meteor.user()) {
       this.render("user");
     } else {
       this.render('loading');
@@ -88,8 +88,55 @@ Router.route('/users/:username', {
     },
     title: function() {
     },
-    parent: "homr"
+    parent: "home"
 });
+
+
+Router.route('/admin', {
+    name: "admin",
+    template: "admin",
+    subscriptions: function(){
+      Meteor.subscribe("admin");
+    },
+    action: function () {
+    if (this.ready()) {
+      if(Meteor.user() && Meteor.user().isSiteAdmin()){
+        Meteor.call("userCount", function(e,d){
+          Session.set("numUsers", d);
+        });
+        Meteor.call("orgCount", function(e,d){
+          Session.set("numOrgs", d);
+        });
+        Meteor.call("transactionCount", function(e,d){
+          Session.set("numTransactions", d);
+        });
+
+      this.render("admin");
+    }else{
+      this.render('unauthorized');
+    }
+    } else {
+      this.render('loading');
+    }
+  },
+    data: function(){
+        return {
+          users: Meteor.users.find({},{sort: {createdAt: -1}}),
+          orgs: Orgs.find({},{sort: {createdAt: -1}}),
+          transactions: Transactions.find({},{sort: {createdAt: -1}}),
+          numUsers: Session.get("numUsers"),
+          numOrgs: Session.get("numOrgs"),
+          numTransactions: Session.get("numTransactions")
+          // admin: Meteor.admins.findOne({adminname: this.params.adminname})
+        }
+    },
+    title: function() {
+    },
+    parent: "home"
+});
+
+
+
 
 // Router.route('/', function () {
 //   this.render('home');

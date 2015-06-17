@@ -200,6 +200,16 @@ siteConfig.insert({name: "currencySymbol", value: site.currencySymbol});
 return true;
 
     },
+
+    userCount: function(){
+        return Meteor.users.find().count();
+    },
+    orgCount: function(){
+        return Orgs.find().count();
+    },
+        transactionCount: function(){
+        return Transactions.find().count();
+    },
     "search": function(q) {
         users = Meteor.users.find({
             
@@ -367,6 +377,20 @@ return true;
     		Accounts.setPassword(Meteor.userId(), user.newPassword,{logout: false});
     	}
     	return true;
+
+    },
+    "addUser" : function(user){
+
+        user.profile.balance = 0;
+        user.profile.favorites = {
+            users: [],
+            orgs: []
+        }
+        user.createdAt = new Date();
+        uid = Accounts.createUser(user);
+        if(user.password == '') Accounts.sendEnrollmentEmail(uid);
+        return true;
+
 
     },
 

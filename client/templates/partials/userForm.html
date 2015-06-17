@@ -1,0 +1,46 @@
+<template name='userForm'>
+	<div class='col-md-4 userForm'>
+	{{#unless profile.avatar}}
+		<img class='img-responsive avatar' src='/avatar.png'>
+	{{else}}
+			<img class='img-responsive avatar' src='{{profile.avatar}}'>
+	{{/unless}}
+		<div class='small text-center'>Click avatar to update</div>
+		<input type='file' name='avatarUpload' class='hidden form-control avatarUpload'>
+	</div>
+	<div class='col-md-8'>
+	<fieldset class='form-group'>
+		<label for='username'>Username</label>
+		<input class='form-control username' name='username' value='{{username}}'>
+	</fieldset>
+	<fieldset class='form-group'>
+		<label for='name'>Name</label>
+		<input class='form-control name' name='name' value='{{profile.name}}'>
+	</fieldset>
+	<fieldset class='form-group'>
+		<label for='password'>Password</label>
+		<input type='password' class='form-control password' name='password'>
+	</fieldset>
+		<fieldset class='form-group'>
+		<label for='email'>Email</label>
+		<input type='email' class='form-control email' name='email' value='{{emails.[0].address}}'>
+	</fieldset>
+		<fieldset class='form-group'>
+		<label for='url'>URL</label>
+		<input class='form-control url' name='url' value='{{profile.url}}'>
+	</fieldset>
+			<fieldset class='form-group'>
+		<label for='tagList'>Your tags</label>
+		<input class='form-control tagList'>
+		<p class='small'>A comma-separated list of tags other users can search for you with.</p>
+	</fieldset>	
+	<fieldset class='form-group text-right'>
+	{{#if _id}}
+		<button type='submit' class='btn btn-default'><i class='fa fa-check'></i> Update</button>
+		{{else}}
+		<button type='submit' class='btn btn-default'><i class='fa fa-check'></i> Signup</button>
+
+		{{/if}}
+	</fieldset>
+</div>
+</template>
