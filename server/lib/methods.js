@@ -372,7 +372,6 @@ return true;
     "approveTransactionOrg" : function(id){
 
         t = Transactions.findOne({_id: id});
-        console.log(t);
         recipient = t.fromTheUser();
         org = t.toTheOrg();
 

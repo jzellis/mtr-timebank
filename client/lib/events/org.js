@@ -45,8 +45,8 @@ Template.org.events({
     Roles.update({_id: rid}, {$set: {contact: $(e.currentTarget).is(":checked")}});
 
     },
+
         'click .removeFromOrg' : function(e){
-            alert('yo');
             if(confirm("Are you sure you want to remove this user from your org?")){
                 Meteor.call("removeUserFromOrg", $('input[name="orgId"]').val(), $(e.currentTarget).attr('data-id'));
             }
